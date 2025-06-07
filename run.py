@@ -30,7 +30,8 @@ def inject_active_path():
 
 @app.route("/")
 def home():
-    return redirect(url_for('user.index'))
+#    return redirect(url_for('user.index'))
+    return render_template('index.html')
 
 if __name__=="__main__":
     with app.app_context():  #init db creation with sqlachemy as class~table
