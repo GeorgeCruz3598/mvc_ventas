@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, redirect, render_template, request, url_for
 from database import db # import orm sqlachemy obejt 'db'
 
 #import BP
@@ -30,7 +30,7 @@ def inject_active_path():
 
 @app.route("/")
 def home():
-    return "<h1>App Ventas</h1>"
+    return render_template('index.html')
 
 if __name__=="__main__":
     with app.app_context():  #init db creation with sqlachemy as class~table
