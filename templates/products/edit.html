@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+
+{% block title %} PRODUCTS | UPDATE {% endblock %}
+
+{% block content %} 
+<h1>Product Update</h1>
+<form action="{{ url_for('product.edit',id=product.id) }}" method="post">
+    <div class="mb-3">
+        <label for="" class="form-label">Description</label>
+        <input type="text" class="form-control" name="description" value="{{product.description}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Price</label>
+        <input type="number" class="form-control" name="price" min="0" step="0.01" value="{{product.price | round(2)}}" required>
+            <!--round 2 para redondear 2 digitos en el form-->
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Stock</label>
+        <input type="number" class="form-control" name="stock" value="{{product.stock}}" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+
+{% endblock %}

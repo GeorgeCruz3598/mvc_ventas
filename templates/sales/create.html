@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+
+{% block title %} SALES| CREATE {% endblock %}
+
+{% block content %} 
+<h1>Sale Registration</h1>
+<form action="{{url_for('sale.create')}}" method="post">
+    <div class="mb-3">
+        <label for="" class="form-label">Date</label>
+        <input type="date" class="form-control" name="date" required>
+    </div>
+    
+    <div class="mb-3">
+        <label for="" class="form-label">Client</label>
+        <select name="client_id" class="form-control">
+            <option value="">Select a Client</option>
+            <!--remember that list of clients & products were sent from controller as the
+            view function create specify-->    
+            {% for client in clients %}
+                <option value="{{client.id}}">{{client.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">Products</label>
+        <select name="product_id" class="form-control">
+            <option value="">Select a Product</option>
+            <!--remember that list of clients & products were sent from controller as the
+            view function create specify-->    
+            {% for product in products %}
+                <option value="{{product.id}}">{{product.description}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label"> Quantity</label>
+        <input type="number" class="form-control" name="quantity" required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+{% endblock %}

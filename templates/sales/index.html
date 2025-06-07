@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+
+{% block title %} SALES {% endblock %}
+
+{% block content %} 
+
+<h1>List of Sales</h1>
+
+<a class="btn btn-success mb-3" href="{{url_for('sale.create')}}"> New</a>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>ID</th> <th>DATE</th> <th>PRODUCT</th> <th>CLIENT</th> <th>QUANTITY</th> <th></th> <th></th>
+    </tr>
+    <!--for list items in controller + view function we send the entire sales table-->
+    {% for item in sales %}
+    <tr>
+        <td>{{item.id}}</td>
+        <td>{{item.date.strftime('%d/%m/%Y')}}</td>
+        <td>{{item.product_relation.description}}</td>   <!--access to relationed table fields through the relation created in models for sales, products cleints-->
+        <td>{{item.client_relation.name}}</td> 
+        <td>{{item.quantity}}</td>
+         <!--round para redondear en el form -->
+        <td><a href="{{url_for('sale.edit',id=item.id)}}" class="btn btn-warning">Edit</a></td> 
+        <td><a href="{{url_for('sale.delete',id=item.id)}}" class="btn btn-danger">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}
+

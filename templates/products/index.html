@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+
+{% block title %} PRODUCTS {% endblock %}
+
+{% block content %} 
+
+<h1>List of Products</h1>
+
+<a class="btn btn-success mb-3" href="{{url_for('product.create')}}"> New</a>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>ID</th> <th>DESCRIPTION</th> <th>PRICE</th> <th>STOCK</th> <th></th> <th></th>
+    </tr>
+    {% for item in products %}
+    <tr>
+        <td>{{item.id}}</td><td>{{item.description}}</td><td>{{item.price | round(2)}}</td> <td>{{item.stock}}</td>
+         <!--round para redondear en el form -->
+        <td><a href="{{url_for('product.edit',id=item.id)}}" class="btn btn-warning">Edit</a></td> 
+        <td><a href="{{url_for('product.delete',id=item.id)}}" class="btn btn-danger">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}
+

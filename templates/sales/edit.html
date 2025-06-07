@@ -1,0 +1,50 @@
+{% extends 'base.html'%}
+
+{% block title %} SALES | EDIT {% endblock %}
+
+{% block content %} 
+<h1>Sale Edit</h1>
+<form action="{{url_for('sale.edit',id=sale.id)}}" method="post"> 
+    <!--sale represents a row-object sent from controller but also represent -->
+     
+    <div class="mb-3">
+        <label for="" class="form-label">Date</label>
+        <input type="date" class="form-control" name="date" 
+        value="{{sale.date.strftime('%Y-%m-%d')}}" required> 
+        <!--the format Y-m-d is reqeuired to reflect data stored in DB(d-m-Y) in the form-->
+    </div> 
+
+    <div class="mb-3">
+        <label for="" class="form-label">Client</label>
+        <select name="client_id" class="form-control">
+            <option value="">Select a Client</option>
+            <!--remember that list of clients & products were sent from controller as the
+            view function create specify-->    
+            {% for client in clients %}
+                <option value="{{client.id}}" {% if client.id == sale.client_id%} selected {% endif %}>
+                    {{client.name}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">Products</label>
+        <select name="product_id" class="form-control">
+            <option value="">Select a Product</option>
+            {% for product in products %}
+                <option value="{{product.id}}" {% if product.id == sale.product_id %} selected {% endif %}>
+                    {{product.description}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label"> Quantity</label>
+        <input type="number" class="form-control" name="quantity" value="{{sale.quantity}}" required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Edit</button>
+</form>
+
+{% endblock %}

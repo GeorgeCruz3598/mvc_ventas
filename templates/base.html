@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container"> <!--para tener algo de espacio-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                    <a class="nav-link {{is_active('/users/')}}" aria-current="page" href="{{url_for('user.index')}}">Users</a>
+                     <!--si la ruta actual coincide con la especificada el tab correspondiente sera remarcada con active-->
+                    </li> 
+                    <li class="nav-item">
+                    <a class="nav-link {{is_active('/clients/')}}"  href="/clients/">Clients</a> <!--url prefix not parent folder name-->
+                    <li class="nav-item">
+                    <a class="nav-link {{is_active('/products/')}}" href="{{url_for('product.index')}}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link {{is_active('/sales/')}}" href="/sales/">Sales</a> 
+                     <!-- si especificaramos solo "/sales" lanzaria un error porque queremos refereciar al endpoint index del BP sales que es 
+                              "/client"(de url_prefix) + "/" = "/client/"  
+                       por eso es mejor usar url_for  
+                       recuerda que / representa al endpoint index(), /create al endpoint create(), ...
+                       
+                       en este caso si la ruta para el endpoint index es /sales/ y escribes solo /sales se autocompletara
+                       pero si fuera definida como /sales solamente y tu escribieras /sales/ se tendria 404 not found
+                       -->
+                   
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#">EXIT</a>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+        {% block content %} 
+        {% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  </body>
+</html>
