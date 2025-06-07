@@ -1,5 +1,4 @@
 venv1/
-instance/ventas.db
 __pycache__/
 controllers/__pycache__/
 models/__pycache__/
